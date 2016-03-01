@@ -36,8 +36,10 @@ class AssociatedValuesTests: XCTestCase {
     func testFunnyName() {
         let object = NSObject()
         XCTAssert(object.funnyName == "Goofy")
-        object.funnyName = "Donald"
-        XCTAssert(object.funnyName == "Donald")
+        for _ in 0..<100000 {
+            object.funnyName = "Donald"
+            XCTAssert(object.funnyName == "Donald")
+        }
     }
     
     func testWeakRelation() {

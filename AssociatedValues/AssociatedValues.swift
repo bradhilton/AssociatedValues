@@ -12,10 +12,11 @@ public func getAssociatedValueForProperty<T>(property: String, ofObject object: 
     return (objc_getAssociatedObject(object, property.address) as? AssociatedValue)?.value as? T
 }
 
-public func getAssociatedValueForProperty<T>(property: String, ofObject object: AnyObject, withInitialValue initialValue: T) -> T {
+public func getAssociatedValueForProperty<T>(property: String, ofObject object: AnyObject, @autoclosure withInitialValue initialValue: () -> T) -> T {
     if let value: T = getAssociatedValueForProperty(property, ofObject: object) {
         return value
     } else {
+        let initialValue = initialValue()
         setAssociatedValue(initialValue, forProperty: property, ofObject: object)
         return initialValue
     }
