@@ -13,13 +13,16 @@ public func getAssociatedValueForProperty<T>(property: String, ofObject object: 
 }
 
 public func getAssociatedValueForProperty<T>(property: String, ofObject object: AnyObject, @autoclosure withInitialValue initialValue: () -> T) -> T {
-    if let value: T = getAssociatedValueForProperty(property, ofObject: object) {
-        return value
-    } else {
-        let initialValue = initialValue()
-        setAssociatedValue(initialValue, forProperty: property, ofObject: object)
-        return initialValue
-    }
+    return getAssociatedValueForProperty(property, ofObject: object) ?? returnInitialValue(initialValue(), forProperty: property, ofObject: object)
+}
+
+public func getAssociatedValueForProperty<T>(property: String, ofObject object: AnyObject, withInitialValue initialValue: () -> T) -> T {
+    return getAssociatedValueForProperty(property, ofObject: object) ?? returnInitialValue(initialValue(), forProperty: property, ofObject: object)
+}
+
+func returnInitialValue<T>(initialValue: T, forProperty property: String, ofObject object: AnyObject) -> T {
+    setAssociatedValue(initialValue, forProperty: property, ofObject: object)
+    return initialValue
 }
 
 public func setAssociatedValue<T>(value: T?, forProperty property: String, ofObject object: AnyObject) {
