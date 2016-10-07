@@ -8,40 +8,40 @@
 
 import ObjectiveC.runtime
 
-public func getAssociatedValueForProperty<T>(property: String, ofObject object: AnyObject) -> T? {
+public func getAssociatedValueForProperty<T>(_ property: String, ofObject object: AnyObject) -> T? {
     return (objc_getAssociatedObject(object, property.address) as? AssociatedValue)?.value as? T
 }
 
-public func getAssociatedValueForProperty<T>(property: String, ofObject object: AnyObject, @autoclosure withInitialValue initialValue: () -> T) -> T {
+public func getAssociatedValueForProperty<T>(_ property: String, ofObject object: AnyObject, withInitialValue initialValue: @autoclosure () -> T) -> T {
     return getAssociatedValueForProperty(property, ofObject: object) ?? returnInitialValue(initialValue(), forProperty: property, ofObject: object)
 }
 
-public func getAssociatedValueForProperty<T>(property: String, ofObject object: AnyObject, withInitialValue initialValue: () -> T) -> T {
+public func getAssociatedValueForProperty<T>(_ property: String, ofObject object: AnyObject, withInitialValue initialValue: () -> T) -> T {
     return getAssociatedValueForProperty(property, ofObject: object) ?? returnInitialValue(initialValue(), forProperty: property, ofObject: object)
 }
 
-func returnInitialValue<T>(initialValue: T, forProperty property: String, ofObject object: AnyObject) -> T {
+func returnInitialValue<T>(_ initialValue: T, forProperty property: String, ofObject object: AnyObject) -> T {
     setAssociatedValue(initialValue, forProperty: property, ofObject: object)
     return initialValue
 }
 
-public func setAssociatedValue<T>(value: T?, forProperty property: String, ofObject object: AnyObject) {
+public func setAssociatedValue<T>(_ value: T?, forProperty property: String, ofObject object: AnyObject) {
     setAssociatedValue(AssociatedValue(value), forProperty: property, ofObject: object)
 }
 
-public func setWeakAssociatedValue<T : AnyObject>(value: T?, forProperty property: String, ofObject object: AnyObject) {
+public func setWeakAssociatedValue<T : AnyObject>(_ value: T?, forProperty property: String, ofObject object: AnyObject) {
     setAssociatedValue(AssociatedValue(weak: value), forProperty: property, ofObject: object)
 }
 
 extension String {
     
-    private var address: UnsafePointer<Void> {
-        return UnsafePointer<Void>(bitPattern: abs(hashValue))
+    fileprivate var address: UnsafeRawPointer {
+        return UnsafeRawPointer(bitPattern: abs(hashValue))!
     }
     
 }
 
-private func setAssociatedValue(associatedValue: AssociatedValue, forProperty property: String, ofObject object: AnyObject) {
+private func setAssociatedValue(_ associatedValue: AssociatedValue, forProperty property: String, ofObject object: AnyObject) {
     objc_setAssociatedObject(object, property.address, associatedValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
 }
 
