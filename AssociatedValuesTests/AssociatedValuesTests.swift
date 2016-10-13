@@ -13,19 +13,19 @@ extension NSObject {
     
     var funnyName: String {
         get {
-            return getAssociatedValueForProperty("funnyName", ofObject: self, withInitialValue: "Goofy")
+            return getAssociatedValue(key: "funnyName", object: self, initialValue: "Goofy")
         }
         set {
-            setAssociatedValue(newValue, forProperty: "funnyName", ofObject: self)
+            set(associatedValue: newValue, key: "funnyName", object: self)
         }
     }
     
     var weakRelation: NSObject? {
         get {
-            return getAssociatedValueForProperty("weakRelation", ofObject: self)
+            return getAssociatedValue(key: "weakRelation", object: self)
         }
         set {
-            setWeakAssociatedValue(newValue, forProperty: "weakRelation", ofObject: self)
+            set(weakAssociatedValue: newValue, key: "weakRelation", object: self)
         }
     }
     
