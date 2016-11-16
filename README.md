@@ -5,10 +5,10 @@
 extension UIView {
   var identifier: String {
       get {
-          return getAssociatedValueForProperty("identifier", ofObject: self, withInitialValue: "Unknown")
+          return getAssociatedValue(key: "identifier", object: self, initialValue: "Unknown")
       }
       set {
-          setAssociatedValue(newValue, forProperty: "identifier", ofObject: self)
+          set(associatedValue: newValue, key: "identifier", object: self)
       }
   }
 }
