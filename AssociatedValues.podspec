@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'AssociatedValues'
-  s.version      = '4.0.0'
+  s.version      = '4.2.0'
   s.summary      = 'Associated Objects For Swift Values'
   s.description  = <<-DESC
                     AssociatedValues is a simple Swift wrapper around Objective-C runtime associated objects.
