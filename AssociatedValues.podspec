@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
                    DESC
   s.homepage     = 'https://github.com/bradhilton/AssociatedValues'
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
-  s.author       = { 'Brad Hilton' => 'brad@skyvive.com' }
+  s.author       = { 'Brad Hilton' => 'brad.hilton.nw@gmail.com' }
   s.source       = { :git => 'https://github.com/bradhilton/AssociatedValues.git', :tag => s.version }
   s.swift_version = '5.0'
 
